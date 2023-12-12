@@ -39,6 +39,22 @@ label {
   font-size: 1.1rem;
 }
 
+li {
+list-style: none;
+font-weight: bold;
+font-size: 2rem;
+background: forestgreen;
+}
+aside {
+  background-color: antiquewhite;
+  margin-top: 2rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .container {
   width: 40%;
   min-width: 360px;

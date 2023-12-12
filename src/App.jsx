@@ -1,22 +1,75 @@
+import { useState } from "react";
+import Aside from "./Aside";
+
 const App = () => {
+  const [newUser, setNewUser] = useState({
+    firstName: "",
+    lastName: "",
+    zip: "",
+    email: "",
+    password: "",
+    pets: "",
+    dev: false,
+  });
+
+  const [users, setUsers] = useState([]);
+
+  function handleChange(event) {
+    console.log(event.target.id, event.target.value);
+    setNewUser({...newUser, [event.target.id]: event.target.value})
+  }
+  function handleCheckBoxChange(event) {
+    setNewUser({...newUser, [event.target.id]: event.target.checked})
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    setUsers([newUser, ...users]);
+    reset();
+
+    function reset() {
+      setNewUser({
+        firstName: "",
+    lastName: "",
+    zip: "",
+    email: "",
+    password: "",
+    pets: "",
+    dev: false,
+      });
+    }
+  }
+  function removeUser(name) {
+    console.log("remove", name);
+    const filteredUsers = users.filter((user) => name !== user.firstName);
+    setUsers(filteredUsers);
+  }
   return (
+    <div className="wrapper">
     <div className="container">
-      <form>
+      <form onSubmit={handleSubmit} >
         <label htmlFor="firstName">
           First name:
-          <input type="text" id="firstName" name="firstName" />
+          <input onChange={handleChange}
+          value={newUser.firstName}
+          type="text" id="firstName" name="firstName" />
         </label>
         <label htmlFor="lastName">
           Last name:
-          <input type="text" id="lastName" name="lastName" />
+          <input onChange={handleChange}
+          value={newUser.lastName}
+          type="text" id="lastName" name="lastName" />
         </label>
         <label htmlFor="zip">
           Zip code:
-          <input type="text" id="zip" name="zip" />
+          <input onChange={handleChange}
+          value={newUser.zip}
+          type="text" id="zip" name="zip" />
         </label>
         <label htmlFor="email">
           Email:
-          <input type="email" id="email" name="email" />
+          <input onChange={handleChange}
+          value={newUser.email}
+          type="email" id="email" name="email" />
         </label>
         <label htmlFor="password">
           Password
@@ -24,7 +77,9 @@ const App = () => {
         </label>
         <label htmlFor="pets">
           Pets
-          <select id="pets" name="pets">
+          <select onChange={handleChange}
+          value={newUser.pets}
+          id="pets" name="pets">
             <option value=""></option>
             <option value="yes">yes</option>
             <option value="no">no</option>
@@ -32,10 +87,14 @@ const App = () => {
         </label>
         <label htmlFor="dev">
           Developer
-          <input type="checkbox" id="dev" name="dev" />
+          <input checked={newUser.dev}
+          onChange={handleCheckBoxChange}
+          type="checkbox" id="dev" name="dev" />
         </label>
         <button>Submit</button>
       </form>
+    </div>
+    <Aside removeUser={removeUser} users={users} />
     </div>
   );
 };
