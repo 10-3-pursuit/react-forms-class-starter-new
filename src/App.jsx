@@ -9,7 +9,7 @@ const App = () => {
         <label htmlFor="lastName">Last name:</label>
         <input type="text" id="lastName" />
         <label htmlFor="zip">Zip code:</label>
-        <input type="number" id="zip" />
+        <input type="text" id="zip" />
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" />
         <label htmlFor="password">Password</label>
@@ -17,9 +17,8 @@ const App = () => {
         <label htmlFor="pets">Pets</label>
         <select>
           <option value=""></option>
-          <option value="cats">cats</option>
-          <option value="dogs">dogs</option>
-          <option value="none">none</option>
+          <option value="yes">yes</option>
+          <option value="no">no</option>
         </select>
         <label htmlFor="admin">Admin</label>
         <input type="checkbox" />
